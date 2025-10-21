@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-mdm-message-outbox-table
+      author: system
+      remarks: "Создание таблицы mdm_message_outbox для хранения статуса отправки MDM события во внешний сервис"
+      changes:
+        - createTable:
+            tableName: mdm_message_outbox
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  remarks: "уникальный числовой идентификатор записи"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: mdm_message_id
+                  type: uuid
+                  remarks: "уникальный идентификатор события из таблицы mdm_message"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar
+                  remarks: "статус доставки сообщения, возможные значения: NEW, DELIVERED, ERROR, FATAL_ERROR"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: target
+                  type: varchar
+                  remarks: "направление куда должно быть доставлено сообщение, возможные значения: USER_DATA_SERVICE_ONE, USER_DATA_SERVICE_TWO"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: response_data
+                  type: jsonb
+                  remarks: "ответ внешнего сервиса должен быть представлен в виде json с двумя полями: response, errors"
+              - column:
+                  name: create_time
+                  type: timestamp
+                  remarks: "время создания"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_user
+                  type: varchar
+                  remarks: "пользователь, создавший запись"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_update_time
+                  type: timestamp
+                  remarks: "время обновления"
+              - column:
+                  name: last_update_user
+                  type: varchar
+                  remarks: "пользователь, изменивший запись"

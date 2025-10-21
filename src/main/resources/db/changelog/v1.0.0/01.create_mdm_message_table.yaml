@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-mdm-message-table
+      author: system
+      changes:
+        - createTable:
+            tableName: mdm_message
+            remarks: "События из MDM системы"
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  remarks: "уникальный идентификатор записи"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: external_id
+                  type: uuid
+                  remarks: "уникальный идентификатор сообщения из внешней системы"
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: guid
+                  type: varchar
+                  remarks: "уникальный идентификатор клиента"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar
+                  remarks: "тип события, возможные значения: USER_PHONE_CHANGE"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payload
+                  type: jsonb
+                  remarks: "содержание сообщения"
+              - column:
+                  name: create_time
+                  type: timestamp
+                  remarks: "время создания"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_user
+                  type: varchar
+                  remarks: "пользователь, создавший запись"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_update_time
+                  type: timestamp
+                  remarks: "время обновления"
+              - column:
+                  name: last_update_user
+                  type: varchar
+                  remarks: "пользователь, изменивший запись"

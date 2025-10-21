@@ -1,1 +1,17 @@
-spring.application.name=mdm-adapter
+spring:
+  application:
+    name: mdm-adapter
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mdm
+    username: dev
+    password: Ab123456
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.yaml
+    enabled: true
