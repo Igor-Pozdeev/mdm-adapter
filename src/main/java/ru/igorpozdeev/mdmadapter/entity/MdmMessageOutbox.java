@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+import ru.igorpozdeev.mdmadapter.entity.dto.ResponseDataDto;
 import ru.igorpozdeev.mdmadapter.entity.enums.DeliveryStatus;
 import ru.igorpozdeev.mdmadapter.entity.enums.TargetService;
 
@@ -43,10 +46,10 @@ public class MdmMessageOutbox {
     private TargetService target;
 
     /**
-     * Ответ внешнего сервиса в формате JSON.
+     * Ответ внешнего сервиса и ошибки в структурированном виде.
      */
-    @Column(name = "response_data", columnDefinition = "jsonb")
-    private String responseData;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private ResponseDataDto responseData;
 
     @Override
     public boolean equals(Object o) {

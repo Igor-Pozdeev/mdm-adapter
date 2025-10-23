@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import ru.igorpozdeev.mdmadapter.entity.enums.MessageType;
 
 import java.util.UUID;
@@ -43,7 +45,7 @@ public class MdmMessage extends AuditableEntity {
     /**
      * Содержимое сообщения в формате JSON.
      */
-    @Column(name = "payload", columnDefinition = "jsonb")
+    @JdbcTypeCode(SqlTypes.JSON)
     private String payload;
 
     @Override
