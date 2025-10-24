@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: "01.create_mdm_message_table.yaml"
+      author: "Pozdeev IY"
+      changes:
+        - createTable:
+            tableName: mdm_message
+            remarks: "События из MDM системы"
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  remarks: "уникальный идентификатор записи"
+                  primaryKey: true
+              - column:
+                  name: external_id
+                  type: uuid
+                  remarks: "уникальный идентификатор сообщения из внешней системы"
+              - column:
+                  name: guid
+                  type: varchar
+                  remarks: "уникальный идентификатор клиента"
+              - column:
+                  name: type
+                  type: varchar
+                  remarks: "тип события, возможные значения: USER_PHONE_CHANGE"
+              - column:
+                  name: payload
+                  type: jsonb
+                  remarks: "содержание сообщения"
+              - column:
+                  name: create_time
+                  type: timestamp
+                  remarks: "время создания"
+              - column:
+                  name: create_user
+                  type: varchar
+                  remarks: "пользователь, создавший запись"
+              - column:
+                  name: last_update_time
+                  type: timestamp
+                  remarks: "время обновления"
+              - column:
+                  name: last_update_user
+                  type: varchar
+                  remarks: "пользователь, изменивший запись"
