@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import ru.igorpozdeev.mdmadapter.entity.dto.ResponseDataDto;
+import ru.igorpozdeev.mdmadapter.entity.dto.ExternalServiceResponseData;
 import ru.igorpozdeev.mdmadapter.entity.enums.DeliveryStatus;
 import ru.igorpozdeev.mdmadapter.entity.enums.TargetService;
 
@@ -49,7 +49,7 @@ public class MdmMessageOutbox {
      * Ответ внешнего сервиса и ошибки в структурированном виде.
      */
     @JdbcTypeCode(SqlTypes.JSON)
-    private ResponseDataDto responseData;
+    private ExternalServiceResponseData responseData;
 
     @Override
     public boolean equals(Object o) {
